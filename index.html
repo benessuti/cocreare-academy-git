@@ -5,89 +5,27 @@
 	<title></title>  
 	<script type="text/javascript">
 		function buscaCep() {
-			let inputCep = document.querySelector('input[name=cep]');
+			let inputCep = document.getElementById('cep');
 			let cep = inputCep.value.replace('-', '');
-			console.log("cep ", cep);
 			let url = 'https://viacep.com.br/ws/' + cep + '/json';
 			let xhr = new XMLHttpRequest();
 			xhr.open('GET', url, true);
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {    
-					console.log("xhr.responseText ", xhr.responseText);               
-					preencheCampos(JSON.parse(xhr.responseText));
+					alert(xhr.responseText);
 				}
 			}
 			xhr.send();
 		}
 
-		function loadDoc() {
-			var xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					document.getElementById("demo").innerHTML =
-					this.responseText;
-				}
-			};
-			let url = 'https://viacep.com.br/ws/17052330/json';
-			xhr.open("GET", url, true);
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4 && xhr.status == 200) {    
-					console.log("xhr.responseText ", xhr.responseText);               
-					console.log(JSON.parse(xhr.responseText));
-				}
-			}
-			xhr.send();
-		}
-		function preencheCampos(json) {
-			document.querySelector('input[name=endereco]').value = json.logradouro;
-			document.querySelector('input[name=bairro]').value = json.bairro;
-			document.querySelector('input[name=complemento]').value = json.complemento;
-			document.querySelector('input[name=cidade]').value = json.localidade;
-			document.querySelector('input[name=estado]').value = json.uf;
-		}
 	</script>
 </head>
 <body>
 	<form >
-		<div >Buscando CEP</div>
-		<div>
-			<div>
-				<div>
-					<label for="" >CEP</label>
-					<div >
-						<input name="cep" id="cep" type="text">
-						<span ><button onclick="loadDoc()">Buscar CEP</button></span>
-					</div>
-				</div>
-				<div>
-					<label for="" >Endereço</label>
-					<input  name="endereco" type="text">
-				</div>
-				<div>
-					<label for="" >Numero</label>
-					<input  name="numero" type="text">
-				</div>
-			</div>
-			<div >
-				<div>
-					<label for="" >Bairro</label>
-					<input  name="bairro" type="text">
-				</div>
-				<div>
-					<label for="" >Complemento</label>
-					<input  name="complemento" type="text">
-				</div>
-			</div>
-			<div >
-				<div>
-					<label for="" >Cidade</label>
-					<input  name="cidade" type="text">
-				</div>
-				<div>
-					<label for="" >Estado</label>
-					<input  name="estado" type="text">
-				</div>
-			</div>
+		<label for="" >Buscando CEP</label>
+		<div >
+			<input name="cep" id="cep" type="text">
+			<span ><button onclick="buscaCep()">Buscar CEP</button></span>
 		</div>
 	</form>
 </body>
